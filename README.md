@@ -1,2 +1,0 @@
-# doko
-Doko App

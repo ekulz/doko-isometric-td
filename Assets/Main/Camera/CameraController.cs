@@ -9,6 +9,8 @@ public class CameraController : MonoBehaviour {
     Ray ray;
     float smoothTime = 0.3F;
     Vector3 xVelocity = Vector3.zero;
+    public float dragSpeed = 2;
+    private Vector3 dragOrigin;
 
 
     // Use this for initialization
@@ -23,7 +25,7 @@ public class CameraController : MonoBehaviour {
         if (Application.isMobilePlatform)
             processTouchMovement();
         else
-            processMouseMovement();
+            processMouseDragMovement();
     }
       
 
@@ -47,7 +49,7 @@ public class CameraController : MonoBehaviour {
     {
         if (!inMotion)
         {
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(1))
             {
                 hit = new RaycastHit();
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -67,5 +69,26 @@ public class CameraController : MonoBehaviour {
             }
         }
     }
+
+    void processMouseDragMovement()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            dragOrigin = Input.mousePosition;
+            return;
+        }
+
+        if (!Input.GetMouseButton(1)) return;
+
+        Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - dragOrigin);
+        Vector3 move = new Vector3(-pos.x * dragSpeed, 0, -pos.y * dragSpeed);
+
+        transform.Translate(move, Space.World);    
+    }
+
+    /*void projectYOnToZ(float y)
+    {
+        return; 
+    } */
 
 }

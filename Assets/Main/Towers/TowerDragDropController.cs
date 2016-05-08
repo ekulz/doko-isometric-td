@@ -23,24 +23,31 @@ public class TowerDragDropController : MonoBehaviour {
             if (target != null)
             {
                 isMouseDrag = true;
-                Debug.Log("target position :" + target.transform.position);
-                //Convert world position to screen position.
-                screenPosition = Camera.main.WorldToScreenPoint(target.transform.position);
-                offset = target.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPosition.z));
             }
         }
         if (Input.GetMouseButtonUp(0))
         {
             isMouseDrag = false;
         }
+
         if (isMouseDrag)
         {
-            //track mouse position.
-            Vector3 currentScreenSpace = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPosition.z);
-            //convert screen position to world position with offset changes.
-            Vector3 currentPosition = Camera.main.ScreenToWorldPoint(currentScreenSpace) + offset;
-            //It will update target gameobject's current postion.
-            target.transform.position = currentPosition;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit[] hits = Physics.RaycastAll(ray);
+            foreach (RaycastHit hit in hits)
+            {
+                if (hit.transform.tag.Equals("Cube"))
+                {
+                    target.transform.position = new Vector3(Mathf.Round(hit.transform.position.x), 1, Mathf.Round(hit.transform.position.z));
+                    break;
+                }
+
+                if (hit.transform.tag.Equals("ImaginaryCube"))
+                {
+                    target.transform.position = new Vector3(hit.point.x, 1, hit.point.z);
+                    break;
+                }
+            }
         }
     }
 
@@ -48,7 +55,7 @@ public class TowerDragDropController : MonoBehaviour {
     {
         GameObject target = null;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray.origin, ray.direction * 10, out hit))
+        if (Physics.Raycast(ray.origin, ray.direction * 10, out hit) && hit.transform.tag.Equals("Tower")) 
         {
             target = hit.collider.gameObject;
         }
