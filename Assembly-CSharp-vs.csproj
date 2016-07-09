@@ -47,10 +47,15 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Main\Camera\CameraController.cs" />
+     <Compile Include="Assets\Main\Camera\DevControls.cs" />
      <Compile Include="Assets\Main\ConfigurationSettings.cs" />
-     <Compile Include="Assets\Main\Environment\InitalizeTower.cs" />
+     <Compile Include="Assets\Main\Enemies\BasicEnemy.cs" />
+     <Compile Include="Assets\Main\Enemies\EnemyController.cs" />
+     <Compile Include="Assets\Main\Enemies\IEnemy.cs" />
+     <Compile Include="Assets\Main\Enemies\SpawnEnemy.cs" />
+     <Compile Include="Assets\Main\Environment\Grid.cs" />
+     <Compile Include="Assets\Main\Environment\SpawnTower.cs" />
      <Compile Include="Assets\Main\Towers\TowerDragDropController.cs" />
-     <Compile Include="Assets\SpawnTower.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>F:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
