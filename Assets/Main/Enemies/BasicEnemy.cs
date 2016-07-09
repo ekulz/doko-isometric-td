@@ -13,7 +13,7 @@ namespace Assets.Main.Enemies
         private Vector3 _spawnPoint;
         private bool _initializedState;
         private Vector3 _xVelocity = Vector3.zero;
-        private NavMeshAgent _navMeshAgent;
+        private NavMeshAgent _navMeshAgent; //Remove once A start is implemented
 
         // Use this for initialization
         void Start()
