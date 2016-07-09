@@ -46,7 +46,7 @@ public class SpawnTower : MonoBehaviour, IPointerDownHandler, IPointerUpHandler 
         _mouseDrag = false;
     }
 
-    //This is called every frame
+    // Update is called once per frame
     public void Update()
     {
         if (_spawnedTower != null)
